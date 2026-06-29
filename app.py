@@ -297,7 +297,7 @@ else:
                         else: ws1.write(row_num + 1, col_num, val, fmt)
                 
                 for i, col in enumerate(df_act_with_total.columns):
-                    max_len = max(df_act_with_total[col].astype(str).map(len).max(), len(str(col))) + 2
+                    max_len = max(df_act_with_total[col].apply(lambda x: len(str(x)) if pd.notna(x) else 0).max(), len(str(col))) + 2
                     ws1.set_column(i, i, max_len)
 
                 # === ЛИСТ 2: КОТТЕДЖ-ДНИ ===
@@ -322,7 +322,7 @@ else:
                         else: ws2.write(row_num + 1, col_num, val, fmt)
                 
                 for i, col in enumerate(df_occupancy.columns):
-                    max_len = max(df_occupancy[col].astype(str).map(len).max(), len(str(col))) + 2
+                    max_len = max(df_occupancy[col].apply(lambda x: len(str(x)) if pd.notna(x) else 0).max(), len(str(col))) + 2
                     ws2.set_column(i, i, max_len)
 
                 # === ЛИСТ 3: СВОДНАЯ ЗАГРУЗКА ===
@@ -352,7 +352,7 @@ else:
                         else: ws3.write(row_num + 1, col_num, val, fmt)
                 
                 for i, col in enumerate(df_summary_occ.columns):
-                    max_len = max(df_summary_occ[col].astype(str).map(len).max(), len(str(col))) + 2
+                    max_len = max(df_summary_occ[col].apply(lambda x: len(str(x)) if pd.notna(x) else 0).max(), len(str(col))) + 2
                     ws3.set_column(i, i, max_len)
 
                 # === ЛИСТ 4: ДЕТАЛИЗАЦИЯ ВЫРУЧКИ ===
@@ -378,7 +378,7 @@ else:
                         else: ws4.write(row_num + 1, col_num, val, fmt)
                 
                 for i, col in enumerate(df_revenue.columns):
-                    max_len = max(df_revenue[col].astype(str).map(len).max(), len(str(col))) + 2
+                    max_len = max(df_revenue[col].apply(lambda x: len(str(x)) if pd.notna(x) else 0).max(), len(str(col))) + 2
                     ws4.set_column(i, i, max_len)
 
             st.download_button("📥 Скачать Excel", data=output.getvalue(), file_name="Komfort_Analytics.xlsx", mime="application/vnd.ms-excel")
