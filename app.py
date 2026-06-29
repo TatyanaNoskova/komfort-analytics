@@ -234,7 +234,7 @@ else:
                 return ''
             
             # Применяем стилизацию
-            styled_df = df_occupancy.style.applymap(highlight_status, subset=['Статус'])
+            styled_df = df_occupancy.style.map(highlight_status, subset=['Статус'])
             st.dataframe(styled_df, use_container_width=True, height=500)
             
         with tab3:
